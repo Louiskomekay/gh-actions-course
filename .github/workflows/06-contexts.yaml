@@ -1,7 +1,12 @@
 name: 06 - Contexts
+run-name: 06 - Contexts | DEBUG - ${{inputs.debug}}
 on:
   push:
   workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        default: false
 jobs:
   echo-data:
     runs-on: ubuntu-latest
@@ -18,5 +23,7 @@ jobs:
         echo "Run number: ${{ github.run_number }}"
         echo "Actor: ${{ github.actor }}"
     - name: Retrieve Variables
+      env:
+        MY_VAR: "Placeholder Variable Value"
       run: |
         echo "Variable value: ${{vars.MY_VAR}}"
